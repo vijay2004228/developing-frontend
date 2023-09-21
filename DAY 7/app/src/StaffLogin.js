@@ -1,0 +1,61 @@
+import React, { useState } from 'react';
+import './StaffLogin.css';
+import { Link } from 'react-router-dom';
+
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const authenticate = (e) => {
+    e.preventDefault();
+
+    if (password.length === 0 || email.length === 0) {
+      alert('Please enter all fields');
+    } else if (!isValidEmail(email)) {
+      alert('Please enter a valid email address');
+    }
+    else{
+      alert("login successful")
+    }
+  };
+
+  return (
+    <div>
+      <div className="Staffimg">
+        <div className="Staffmain">
+          <h1 className="Stafftitle">Staff Login</h1>
+          <input
+            className="Staffemail"
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className="Staffpassword"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            onClick={authenticate}
+            className="Staffsubmit"
+            type="submit"
+            value="Login"
+          />
+          <div className="linkregister">
+            <Link to="/StaffSignup">
+              <h5>New Staff? Register</h5>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
